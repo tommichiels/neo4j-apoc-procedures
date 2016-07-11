@@ -61,6 +61,11 @@
         <version>9.4-1200-jdbc41</version>
         <scope>provided</scope>
       </dependency>
+      <dependency>
+    <groupId>com.graphaware.neo4j</groupId>
+    <artifactId>tx-executor</artifactId>
+    <version>3.0.2.39</version>
+</dependency>
 
       <dependency>
         <groupId>org.neo4j</groupId>
