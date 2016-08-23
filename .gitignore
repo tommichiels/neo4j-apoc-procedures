@@ -1,6 +1,9 @@
+classes
+*.patch
 dependency-reduced-pom.xml
 derby*
 .gradle
+gradle.properties
 build/
 *~
 \#*

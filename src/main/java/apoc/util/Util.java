@@ -17,6 +17,8 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.stream.*;
 import java.util.zip.DeflaterInputStream;
 import java.util.zip.GZIPInputStream;
@@ -123,15 +125,24 @@ public class Util {
         return relationshipTypes.toArray(new RelationshipType[relationshipTypes.size()]);
     }
 
-    public static <T> T inTx(GraphDatabaseAPI db, Callable<T> callable) {
+    public static <T> Future<T> inTxFuture(ExecutorService pool, GraphDatabaseAPI db, Callable<T> callable) {
         try {
-            return Pools.DEFAULT.submit(() -> {
+            return pool.submit(() -> {
                 try (Transaction tx = db.beginTx()) {
                     T result = callable.call();
                     tx.success();
                     return result;
                 }
-            }).get();
+            });
+        } catch (Exception e) {
+            throw new RuntimeException("Error executing in separate transaction", e);
+        }
+    }
+    public static <T> T inTx(GraphDatabaseAPI db, Callable<T> callable) {
+        try {
+            return inTxFuture(Pools.DEFAULT, db, callable).get();
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Error executing in separate transaction", e);
         }
@@ -152,7 +163,7 @@ public class Util {
 
     public static Map<String, Object> subMap(Map<String, ?> params, String prefix) {
         Map<String, Object> config = new HashMap<>(10);
-        int len = prefix.length() + (prefix.endsWith(".") ? 0 : 1);
+        int len = prefix.length() + (prefix.isEmpty() || prefix.endsWith(".") ? 0 : 1);
         for (Map.Entry<String, ?> entry : params.entrySet()) {
             String key = entry.getKey();
             if (key.startsWith(prefix)) {
@@ -276,4 +287,21 @@ public class Util {
 		InputStream is = Util.class.getClassLoader().getResourceAsStream(name);
 		return new Scanner(is).useDelimiter("\\Z").next();
 	}
+
+    @SuppressWarnings("unchecked")
+    public static Map<String,Object> readMap(String value) {
+        try {
+            return JsonUtil.OBJECT_MAPPER.readValue(value, Map.class);
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't read as JSON "+value);
+        }
+    }
+
+    public static <T> List<T> take(Iterator<T> iterator, int batchsize) {
+        ArrayList<T> result = new ArrayList<>(batchsize);
+        while (iterator.hasNext() && batchsize-- > 0) {
+            result.add(iterator.next());
+        }
+        return result;
+    }
 }

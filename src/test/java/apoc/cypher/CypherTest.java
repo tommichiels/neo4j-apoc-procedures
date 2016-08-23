@@ -1,17 +1,23 @@
 package apoc.cypher;
 
 import apoc.util.TestUtil;
+import apoc.util.Utils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.QueryExecutionException;
+import org.neo4j.graphdb.Result;
+import org.neo4j.graphdb.TransientTransactionFailureException;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.helpers.collection.Iterators;
 import org.neo4j.test.TestGraphDatabaseFactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +26,7 @@ import static apoc.util.TestUtil.testCall;
 import static apoc.util.TestUtil.testResult;
 import static apoc.util.Util.toLong;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author mh
@@ -29,6 +36,9 @@ public class CypherTest {
 
     private static GraphDatabaseService db;
 
+    @Rule
+    public ExpectedException thrown= ExpectedException.none();
+
     @BeforeClass
     public static void setUp() throws Exception {
         db = new TestGraphDatabaseFactory()
@@ -36,6 +46,7 @@ public class CypherTest {
                 .setConfig(GraphDatabaseSettings.load_csv_file_url_root,new File("src/test/resources").getAbsolutePath())
                 .newGraphDatabase();
         TestUtil.registerProcedure(db, Cypher.class);
+        TestUtil.registerProcedure(db, Utils.class);
     }
 
     @AfterClass
@@ -96,6 +107,24 @@ public class CypherTest {
     }
 
 
+    @Test
+    public void testRunMany() throws Exception {
+        testResult(db, "CALL apoc.cypher.runMany('CREATE (n:Node {name:{name}});\nMATCH (n {name:{name}}) CREATE (n)-[:X {name:{name2}}]->(n);',{params})",map("params",map("name","John","name2","Doe")),
+                r -> {
+                    Map<String, Object> row = r.next();
+                    assertEquals(-1L, row.get("row"));
+                    Map result = (Map) row.get("result");
+                    assertEquals(1L, toLong(result.get("nodesCreated")));
+                    assertEquals(1L, toLong(result.get("labelsAdded")));
+                    assertEquals(1L, toLong(result.get("propertiesSet")));
+                    row = r.next();
+                    result = (Map) row.get("result");
+                    assertEquals(-1L, row.get("row"));
+                    assertEquals(1L, toLong(result.get("relationshipsCreated")));
+                    assertEquals(1L, toLong(result.get("propertiesSet")));
+                    assertEquals(false, r.hasNext());
+                });
+    }
     @Test
     public void testRunFile() throws Exception {
         testResult(db, "CALL apoc.cypher.runFile('src/test/resources/create_delete.cypher')",
@@ -169,5 +198,13 @@ public class CypherTest {
                     assertEquals(3L, toLong(result.get("nodesDeleted")));
                     assertEquals(false, r.hasNext());
                 });
+    }
+
+    @Test(timeout=9000)
+    public void testWithTimeout() {
+        thrown.expect(TransientTransactionFailureException.class);
+        thrown.expectMessage("Explicitly terminated by the user.");
+        Result result = db.execute("CALL apoc.cypher.runTimeboxed('CALL apoc.util.sleep(10000)', null, {timeout})", Collections.singletonMap("timeout", 100));
+        assertFalse(result.hasNext());
     }
 }

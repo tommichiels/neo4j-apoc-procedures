@@ -422,47 +422,85 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>APOC User Guide</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">Introduction</a>
 <ul class="sectlevel2">
 <li><a href="#_license">License</a></li>
 <li><a href="#__apoc_name_history">"APOC" Name history</a></li>
-<li><a href="#_download_latest_release">Download latest release</a></li>
+<li><a href="#_download_latest_release_for_the_regular_user">Download latest release (for the regular user)</a></li>
 <li><a href="#_build_install_the_current_development_branch_from_source">Build &amp; install the current development branch from source</a></li>
 <li><a href="#_calling_procedures_within_cypher">Calling Procedures within Cypher</a></li>
-<li><a href="#_included_procedures_overview">Included Procedures Overview</a>
+</ul>
+</li>
+<li><a href="#_help_and_usage">Help and Usage</a></li>
+<li><a href="#_overview_of_apoc_procedures">Overview of APOC Procedures</a>
+<ul class="sectlevel2">
+<li><a href="#_manual_indexes">Manual Indexes</a>
 <ul class="sectlevel3">
-<li><a href="#_built_in_help">Built in Help</a></li>
-<li><a href="#_manual_indexes">Manual Indexes</a></li>
+<li><a href="#_index_queries">Index Queries</a></li>
+<li><a href="#_index_management">Index Management</a></li>
+<li><a href="#_schema_index_queries">Schema Index Queries</a></li>
+</ul>
+</li>
 <li><a href="#_meta_graph">Meta Graph</a></li>
 <li><a href="#_schema">Schema</a></li>
 <li><a href="#_locking">Locking</a></li>
 <li><a href="#_from_tojson">from/toJson</a></li>
-<li><a href="#_export_import">Export / Import</a></li>
+<li><a href="#_export_import">Export / Import</a>
+<ul class="sectlevel3">
+<li><a href="#_export_to_cypher_script">Export to Cypher Script</a></li>
+<li><a href="#_graphml_import_export">GraphML Import / Export</a></li>
+</ul>
+</li>
 <li><a href="#_loading_data_from_rdbms">Loading Data from RDBMS</a></li>
 <li><a href="#_loading_data_from_web_apis_json_xml_csv">Loading Data from Web-APIs (JSON, XML, CSV)</a></li>
 <li><a href="#_interacting_with_elastic_search">Interacting with Elastic Search</a></li>
-<li><a href="#_streaming_data_to_gephi">Streaming Data to Gephi</a></li>
+<li><a href="#_interacting_with_mongodb">Interacting with MongoDB</a></li>
+<li><a href="#_streaming_data_to_gephi">Streaming Data to Gephi</a>
+<ul class="sectlevel3">
+<li><a href="#_notes">Notes</a></li>
+<li><a href="#_example">Example</a></li>
+</ul>
+</li>
 <li><a href="#_creating_data">Creating Data</a></li>
 <li><a href="#_virtual_nodes_rels">Virtual Nodes/Rels</a></li>
 <li><a href="#_virtual_graph">Virtual Graph</a></li>
+<li><a href="#_generating_graphs">Generating Graphs</a></li>
 <li><a href="#_warmup">Warmup</a></li>
 <li><a href="#_monitoring">Monitoring</a></li>
 <li><a href="#_cypher_execution">Cypher Execution</a></li>
 <li><a href="#_job_management">Job Management</a></li>
 <li><a href="#_graph_refactoring">Graph Refactoring</a></li>
 <li><a href="#_spatial">Spatial</a></li>
-<li><a href="#_helpers">Helpers</a></li>
-<li><a href="#_date_time_support">Date/time Support</a></li>
+<li><a href="#_helpers">Helpers</a>
+<ul class="sectlevel3">
+<li><a href="#_static_value_storage">Static Value Storage</a></li>
+<li><a href="#_conversion_functions">Conversion Functions</a></li>
+<li><a href="#_map_functions">Map Functions</a></li>
+<li><a href="#_collection_functions">Collection Functions</a></li>
+<li><a href="#_lookup_functions">Lookup Functions</a></li>
+<li><a href="#_phonetic_comparisons">Phonetic Comparisons</a></li>
+</ul>
+</li>
+<li><a href="#_date_time_support">Date/time Support</a>
+<ul class="sectlevel3">
+<li><a href="#_conversion_between_formatted_dates_and_timestamps">Conversion between formatted dates and timestamps</a></li>
+<li><a href="#_reading_separate_datetime_fields">Reading separate datetime fields</a></li>
+</ul>
+</li>
 <li><a href="#_bitwise_operations">Bitwise operations</a></li>
-<li><a href="#_path_expander">Path Expander</a></li>
+<li><a href="#_path_expander">Path Expander</a>
+<ul class="sectlevel3">
+<li><a href="#_relationship_filter">Relationship Filter</a></li>
+<li><a href="#_label_filter">Label Filter</a></li>
+</ul>
+</li>
 <li><a href="#_parallel_node_search">Parallel Node Search</a></li>
 <li><a href="#_graph_algorithms_work_in_progress">Graph Algorithms (work in progress)</a></li>
 </ul>
 </li>
-<li><a href="#_detailed_documentation">Detailed Documentation</a>
-<ul class="sectlevel1">
-<li><a href="#_help_and_usage">Help and Usage</a></li>
 <li><a href="#_text_and_lookup_indexes">Text and Lookup Indexes</a>
-<ul class="sectlevel3">
+<ul class="sectlevel2">
 <li><a href="#_index_queries_2">Index Queries</a></li>
 <li><a href="#_index_management_2">Index Management</a></li>
 <li><a href="#_full_text_search">Full Text Search</a>
@@ -498,6 +536,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_usage">Usage</a></li>
 <li><a href="#_examples_2">Examples</a></li>
+<li><a href="#_expand_with_config">Expand with Config</a></li>
 </ul>
 </li>
 <li><a href="#_centrality_algorithms">Centrality Algorithms</a>
@@ -535,6 +574,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_load_json">Load JSON</a>
 <ul class="sectlevel3">
 <li><a href="#_load_json_with_additional_parameters">Load Json with additional parameters</a></li>
+<li><a href="#_load_json_stackoverflow_example">Load JSON StackOverflow Example</a></li>
 </ul>
 </li>
 <li><a href="#_load_jdbc">Load JDBC</a>
@@ -544,10 +584,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_cassandra_example">Cassandra Example</a></li>
 </ul>
 </li>
-<li><a href="#_streaming_data_to_gephi_2">Streaming Data to Gephi</a>
-<ul class="sectlevel3">
+<li><a href="#_streaming_data_to_gephi_2">Streaming Data to Gephi</a></li>
 <li><a href="#_notes_2">Notes</a></li>
-<li><a href="#_example_2">Example</a></li>
+<li><a href="#_example_2">Example</a>
+<ul class="sectlevel3">
 <li><a href="#_format">Format</a></li>
 <li><a href="#_specifics_details">Specifics Details</a></li>
 </ul>
@@ -578,27 +618,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_cypher_operations">Cypher Operations</a>
 <ul class="sectlevel2">
 <li><a href="#_running_cypher_fragments">Running Cypher fragments</a>
-<ul class="sectlevel4">
+<ul class="sectlevel3">
 <li><a href="#_cypher_execution_2">Cypher Execution</a></li>
 <li><a href="#_example_fast_node_counts_by_label">Example: Fast Node-Counts by Label</a></li>
+<li><a href="#_running_a_cypher_statement_timeboxed">running a cypher statement timeboxed</a></li>
 </ul>
 </li>
 <li><a href="#_job_management_and_periodic_execution">Job management and periodic execution</a></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="imageblock" style="float: right">
 <div class="content">
 <img src="https://raw.githubusercontent.com/neo4j-contrib/neo4j-apoc-procedures/master/docs/img/apoc.gif" alt="apoc">
-</div>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -620,7 +658,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_download_latest_release">Download latest release</h3>
+<h3 id="_download_latest_release_for_the_regular_user">Download latest release (for the regular user)</h3>
 <div class="paragraph">
 <p>Go to <a href="http://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/latest" class="bare">http://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/latest</a>
 to find the latest release and download the binary jar to place into your $NEO4J_HOME/plugins folder.</p>
@@ -631,14 +669,13 @@ to find the latest release and download the binary jar to place into your $NEO4J
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">git clone http://github.com/neo4j-contrib/neo4j-apoc-procedures
-cd neo4j-apoc-procedures
-mvn clean install
-cp target/apoc-1.0.0-SNAPSHOT.jar $NEO4J_HOME/plugins/
+./gradlew shadow
+cp build/libs/apoc-&lt;version&gt;-SNAPSHOT-all.jar $NEO4J_HOME/plugins/
 $NEO4J_HOME/bin/neo4j restart</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you want to run embedded or use neo4j-shell on a disk store, configure your <code>plugins</code> directory in <code>conf/neo4j.conf</code> with <code>dbms.plugin.directory=path/to/plugins</code>.</p>
+<p>A full build including running the tests can be run by <code>./gradlew build</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -650,6 +687,7 @@ $NEO4J_HOME/bin/neo4j restart</code></pre>
 <p>But you can also integrate them into your Cypher statements which makes them so much more powerful.</p>
 </div>
 <div class="listingblock">
+<div class="title">Load JSON example</div>
 <div class="content">
 <pre class="highlight"><code class="language-cypher" data-lang="cypher">WITH 'https://raw.githubusercontent.com/neo4j-contrib/neo4j-apoc-procedures/master/src/test/resources/person.json' AS url
 
@@ -660,10 +698,11 @@ MERGE (p:Person {name:person.name})
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_included_procedures_overview">Included Procedures Overview</h3>
-<div class="sect3">
-<h4 id="_built_in_help">Built in Help</h4>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_help_and_usage">Help and Usage</h2>
+<div class="sectionbody">
 <div class="imageblock">
 <div class="content">
 <img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc-help-apoc.jpg" alt="apoc help apoc" width="600">
@@ -689,13 +728,32 @@ WITH * WHERE text IS null
 RETURN name AS undocumented</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>To generate the help from <code>@Description</code> annotations, apoc currently scans the jar file with ASM.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_apoc_procedures">Overview of APOC Procedures</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_manual_indexes">Manual Indexes</h3>
 <div class="sect3">
-<h4 id="_manual_indexes">Manual Indexes</h4>
-<div class="sect4">
-<h5 id="_index_queries">Index Queries</h5>
+<h4 id="_index_queries">Index Queries</h4>
 <div class="paragraph">
 <p>Procedures to add to and query manual indexes</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Please note that there are (case-sensitive) <a href="http://neo4j.com/docs/developer-manual/current/#cypher-schema">automatic schema indexes</a>, for equality, non-equality, existence, range queries, starts with, ends-with and contains!
+</td>
+</tr>
+</table>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -759,8 +817,8 @@ RETURN name AS undocumented</code></pre>
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_index_management">Index Management</h5>
+<div class="sect3">
+<h4 id="_index_management">Index Management</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -768,7 +826,7 @@ RETURN name AS undocumented</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.index.list() - YIELD type,name,config</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.index.list() YIELD type,name,config</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lists all manual indexes</p></td>
 </tr>
 <tr>
@@ -794,8 +852,8 @@ call apoc.index.nodes('Person','name:name100*') YIELD node, weight return * limi
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_schema_index_queries">Schema Index Queries</h5>
+<div class="sect3">
+<h4 id="_schema_index_queries">Schema Index Queries</h4>
 <div class="paragraph">
 <p>Schema Index lookups that keep order and can apply limits</p>
 </div>
@@ -817,8 +875,8 @@ call apoc.index.nodes('Person','name:name100*') YIELD node, weight return * limi
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_meta_graph">Meta Graph</h4>
+<div class="sect2">
+<h3 id="_meta_graph">Meta Graph</h3>
 <div class="imageblock">
 <div class="content">
 <img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc.meta.graph.jpg" alt="apoc.meta.graph" width="600">
@@ -851,6 +909,10 @@ config is: {labels:[labels],rels:[rel-types],sample:sample}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">examines a subset of the graph to provide a tabular meta information</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.meta.stats  yield labelCount, relTypeCount, propertyKeyCount, nodeCount, relCount, labels, relTypes, stats</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">returns the information stored in the transactional database statistics</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.meta.type(value)</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">type name of a value (<code>INTEGER,FLOAT,STRING,BOOLEAN,RELATIONSHIP,NODE,PATH,NULL,UNKNOWN,MAP,LIST</code>)</p></td>
 </tr>
@@ -869,8 +931,8 @@ RETURN n LIMIT 5</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_schema">Schema</h4>
+<div class="sect2">
+<h3 id="_schema">Schema</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -884,8 +946,8 @@ RETURN n LIMIT 5</code></pre>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_locking">Locking</h4>
+<div class="sect2">
+<h3 id="_locking">Locking</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -907,8 +969,8 @@ RETURN n LIMIT 5</code></pre>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_from_tojson">from/toJson</h4>
+<div class="sect2">
+<h3 id="_from_tojson">from/toJson</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -931,13 +993,49 @@ RETURN n LIMIT 5</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.convert.fromJsonMap( '{"a":42,"b":"foo","c":[1,2,3]}')</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">converts json map to Cypher map</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.convert.toTree([paths]) yield value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">creates a stream of nested documents representing the at least one root of these paths</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_export_import">Export / Import</h3>
+<div class="paragraph">
+<p>Data is exported as cypher statements (for neo4j-shell, and partly apoc.cypher.runFile to the given file.</p>
+</div>
+<div class="sect3">
+<h4 id="_export_to_cypher_script">Export to Cypher Script</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.cypher.all(file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports whole database incl. indexes as cypher statements to the provided file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.cypher.data(nodes,rels,file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports given nodes and relationships incl. indexes as cypher statements to the provided file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.cypher.graph(graph,file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports given graph object incl. indexes as cypher statements to the provided file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.cypher.query(query,file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports nodes and relationships from the cypher statement incl. indexes as cypher statements to the provided file</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_export_import">Export / Import</h4>
+<h4 id="_graphml_import_export">GraphML Import / Export</h4>
 <div class="paragraph">
-<p>Data is exported as cypher statements (for neo4j-shell, and partly apoc.cypher.runFile to the given file.</p>
+<p>GraphML is used by other tools, like Gephi and CytoScape to read graph data.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -946,22 +1044,31 @@ RETURN n LIMIT 5</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.cypherAll(file,config)</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">exports whole database incl. indexes as cypher statements to the provided file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.import.graphml(file-or-url,{batchSize: 10000, readLabels: true, storeNodeIds: false, defaultRelationshipType:"RELATED"})</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">imports graphml into the graph</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.cypherData(nodes,rels,file,config)</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">exports given nodes and relationships incl. indexes as cypher statements to the provided file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.graphml.all(file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports whole database as graphml to the provided file</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.cypherQuery(query,file,config)</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">exports nodes and relationships from the cypher statement incl. indexes as cypher statements to the provided file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.graphml.data(nodes,rels,file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports given nodes and relationships as graphml to the provided file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.graphml.graph(graph,file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports given graph object as graphml to the provided file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.export.graphml.query(query,file,config)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exports nodes and relationships from the cypher statement as graphml to the provided file</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_loading_data_from_rdbms">Loading Data from RDBMS</h4>
+</div>
+<div class="sect2">
+<h3 id="_loading_data_from_rdbms">Loading Data from RDBMS</h3>
 <div class="imageblock">
 <div class="content">
 <img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc-jdbc-northwind-load.jpg" alt="apoc jdbc northwind load" width="600">
@@ -987,9 +1094,36 @@ RETURN n LIMIT 5</code></pre>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>To simplify the JDBC URL syntax, for example 'jdbc:derby:derbyDB', and so as to mask the details one can define in conf/neo4j.conf</p>
 </div>
-<div class="sect3">
-<h4 id="_loading_data_from_web_apis_json_xml_csv">Loading Data from Web-APIs (JSON, XML, CSV)</h4>
+<div class="listingblock">
+<div class="content">
+<pre>apoc.jdbc.derby.url=jdbc:derby:derbyDB</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>CALL apoc.load.jdbc('jdbc:derby:derbyDB','PERSON') YIELD row CREATE (:Person {name:row.name})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>becomes</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>CALL apoc.load.jdbc('derby','PERSON') YIELD row CREATE (:Person {name:row.name})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The 3rd value in the 'apoc.jdbc.derby.url=' effectively defines an &lt;alias&gt; to be used in the apoc.load.jdbc('&lt;alias&gt;',&#8230;&#8203;.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_loading_data_from_web_apis_json_xml_csv">Loading Data from Web-APIs (JSON, XML, CSV)</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1002,7 +1136,11 @@ RETURN n LIMIT 5</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.load.xml('http://example.com/test.xml') YIELD value as doc CREATE (p:Person) SET p.name = doc.name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">load from XML URL (e.g. web-api) to import XML as single nested map with attributes and <code>_type</code>, <code>_text</code> and `_children`x fields.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">load from XML URL (e.g. web-api) to import XML as single nested map with attributes and <code>_type</code>, <code>_text</code> and <code>_children</code> fields.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.load.xmlSimple('http://example.com/test.xml') YIELD value as doc CREATE (p:Person) SET p.name = doc.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">load from XML URL (e.g. web-api) to import XML as single nested map with attributes and <code><em>type</code>, <code>_text</code> fields and <code></em>&lt;childtype&gt;</code> collections per child-element-type.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.load.csv('url',{sep:";"}) YIELD lineNo, list, map</code></p></td>
@@ -1012,8 +1150,8 @@ config contains any of: <code>{skip:1,limit:5,header:false,sep:'TAB',ignore:['tm
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_interacting_with_elastic_search">Interacting with Elastic Search</h4>
+<div class="sect2">
+<h3 id="_interacting_with_elastic_search">Interacting with Elastic Search</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 60%;">
@@ -1051,8 +1189,61 @@ config contains any of: <code>{skip:1,limit:5,header:false,sep:'TAB',ignore:['tm
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_streaming_data_to_gephi">Streaming Data to Gephi</h4>
+<div class="sect2">
+<h3 id="_interacting_with_mongodb">Interacting with MongoDB</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.mongodb.get(host-or-port,db-or-null,collection-or-null,query-or-null) yield value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">perform a find operation on mongodb collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.mongodb.count(host-or-port,db-or-null,collection-or-null,query-or-null) yield value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">perform a find operation on mongodb collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.mongodb.first(host-or-port,db-or-null,collection-or-null,query-or-null) yield value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">perform a first operation on mongodb collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.mongodb.find(host-or-port,db-or-null,collection-or-null,query-or-null,projection-or-null,sort-or-null) yield value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">perform a find,project,sort operation on mongodb collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.mongodb.insert(host-or-port,db-or-null,collection-or-null,list-of-maps)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inserts the given documents into the mongodb collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.mongodb.delete(host-or-port,db-or-null,collection-or-null,list-of-maps)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inserts the given documents into the mongodb collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.mongodb.update(host-or-port,db-or-null,collection-or-null,list-of-maps)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inserts the given documents into the mongodb collection</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Copy these jars into the plugins directory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>mvn dependency:copy-dependencies
+cp target/dependency/mongodb*.jar target/dependency/bson*.jar $NEO4J_HOME/plugins/</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">CALL apoc.mongodb.first('mongodb://localhost:27017','test','test',{name:'testDocument'})</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_streaming_data_to_gephi">Streaming Data to Gephi</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1065,8 +1256,8 @@ config contains any of: <code>{skip:1,limit:5,header:false,sep:'TAB',ignore:['tm
 </tr>
 </tbody>
 </table>
-<div class="sect4">
-<h5 id="_notes">Notes</h5>
+<div class="sect3">
+<h4 id="_notes">Notes</h4>
 <div class="paragraph">
 <p>Gephi has a <a href="https://marketplace.gephi.org/plugin/graph-streaming/">streaming plugin</a>, that can provide and accept <a href="https://github.com/gephi/gephi/wiki/GraphStreaming#Gephi_as_Master">JSON-graph-data</a> in a streaming fashion.</p>
 </div>
@@ -1083,8 +1274,8 @@ config contains any of: <code>{skip:1,limit:5,header:false,sep:'TAB',ignore:['tm
 <p>You can also configure it in <code>conf/neo4j.conf</code> via  <code>apoc.gephi.url=url</code> or <code>apoc.gephi.&lt;key&gt;.url=url</code></p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_example">Example</h5>
+<div class="sect3">
+<h4 id="_example">Example</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-cypher" data-lang="cypher">match path = (:Person)-[:ACTED_IN]-&gt;(:Movie)
@@ -1096,8 +1287,8 @@ return nodes, relationships, time</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_creating_data">Creating Data</h4>
+<div class="sect2">
+<h3 id="_creating_data">Creating Data</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1132,11 +1323,15 @@ return nodes, relationships, time</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.create.uuids(count) YIELD uuid</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">creates count UUIDs</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.nodes.link([nodes],'REL_TYPE')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">creates a linked list of nodes from first to last</p></td>
+</tr>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_virtual_nodes_rels">Virtual Nodes/Rels</h4>
+<div class="sect2">
+<h3 id="_virtual_nodes_rels">Virtual Nodes/Rels</h3>
 <div class="paragraph">
 <p>Virtual Nodes and Relationships don&#8217;t exist in the graph, they are only returned to the UI/user for representing a graph projection.
 They can be visualized or processed otherwise.
@@ -1184,8 +1379,8 @@ RETURN *;</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_virtual_graph">Virtual Graph</h4>
+<div class="sect2">
+<h3 id="_virtual_graph">Virtual Graph</h3>
 <div class="paragraph">
 <p>Create a graph object (map) from information that&#8217;s passed in.
 It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:[nodes],relationships:[relationships]}</code></p>
@@ -1213,14 +1408,62 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock">creates a virtual graph object for later processing</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.graph.fromDB('name',{properties}) - creates a virtual graph object for later processing</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">apoc.graph.fromCypher('statement',{params},'name',{properties})</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.graph.fromDB('name',{properties})</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">creates a virtual graph object for later processing</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.graph.fromCypher('statement',{params},'name',{properties})</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">creates a virtual graph object for later processing</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_warmup">Warmup</h4>
+<div class="sect2">
+<h3 id="_generating_graphs">Generating Graphs</h3>
+<div class="paragraph">
+<p>Generate undirected (random direction) graphs with semi-real random distributions based on theoretical models.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.generate.er(noNodes, noEdges, 'label', 'type')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generates a graph according to Erdos-Renyi model (uniform)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.generate.ws(noNodes, degree, beta, 'label', 'type')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generates a graph according to Watts-Strogatz model (clusters)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.generate.ba(noNodes, edgesPerNode, 'label', 'type')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generates a graph according to Barabasi-Albert model (preferential attachment)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.generate.complete(noNodes, 'label', 'type')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generates a complete graph (all nodes connected to all other nodes)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.generate.simple([degrees], 'label', 'type')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generates a graph with the given degree distribution</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">CALL apoc.generate.ba(1000, 2, 'TestLabel', 'TEST_REL_TYPE')
+CALL apoc.generate.ws(1000, null, null, null)
+CALL apoc.generate.simple([2,2,2,2], null, null)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_warmup">Warmup</h3>
 <div class="paragraph">
 <p>(thanks @SaschaPeukert)</p>
 </div>
@@ -1237,8 +1480,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_monitoring">Monitoring</h4>
+<div class="sect2">
+<h3 id="_monitoring">Monitoring</h3>
 <div class="paragraph">
 <p>(thanks @ikwattro)</p>
 </div>
@@ -1271,8 +1514,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_cypher_execution">Cypher Execution</h4>
+<div class="sect2">
+<h3 id="_cypher_execution">Cypher Execution</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1288,6 +1531,10 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock">runs each statement in the file, all semicolon separated - currently no schema operations</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.runMany('cypher;\nstatements;',{params})</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">runs each semicolon separated statement and returns summary - currently no schema operations</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.mapParallel(fragment, params, list-to-parallelize) yield value</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">executes fragment in parallel batches with the list segments being assigned to _</p></td>
 </tr>
@@ -1295,14 +1542,18 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.doIt(fragment, params) yield value</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">executes writing fragment with the given parameters</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.runTimeboxed('cypherStatement',{params}, timeout)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">abort statement after timeout millis if not finished</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
 <p>TODO runFile: begin/commit/schema await/constraints/indexes</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_job_management">Job Management</h4>
+<div class="sect2">
+<h3 id="_job_management">Job Management</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1333,6 +1584,10 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.periodic.rock_n_roll(statementIteration, statementAction, batchSize) YIELD batches, total</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">iterate over first statement and apply action statement with given transaction batch size. Returns to numeric values holding the number of batches and the number of total processed rows. E.g.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.periodic.iterate('statement returning items', 'statement per item', {batchSize:1000,parallel:true}) YIELD batches, total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">run the second statement for each item returned by the first statement. Returns number of batches and total processed rows</p></td>
+</tr>
 </tbody>
 </table>
 <div class="ulist">
@@ -1354,8 +1609,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <p>copies over the <code>name</code> property of each person to <code>lastname</code>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_graph_refactoring">Graph Refactoring</h4>
+<div class="sect2">
+<h3 id="_graph_refactoring">Graph Refactoring</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1418,8 +1673,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_spatial">Spatial</h4>
+<div class="sect2">
+<h3 id="_spatial">Spatial</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1437,10 +1692,10 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_helpers">Helpers</h3>
 <div class="sect3">
-<h4 id="_helpers">Helpers</h4>
-<div class="sect4">
-<h5 id="_static_value_storage">Static Value Storage</h5>
+<h4 id="_static_value_storage">Static Value Storage</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1462,8 +1717,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_conversion_functions">Conversion Functions</h5>
+<div class="sect3">
+<h4 id="_conversion_functions">Conversion Functions</h4>
 <div class="paragraph">
 <p>Sometimes type information gets lost, these functions help you to coerce an "Any" value to the concrete type</p>
 </div>
@@ -1504,8 +1759,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_map_functions">Map Functions</h5>
+<div class="sect3">
+<h4 id="_map_functions">Map Functions</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1543,8 +1798,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_collection_functions">Collection Functions</h5>
+<div class="sect3">
+<h4 id="_collection_functions">Collection Functions</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1580,8 +1835,12 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock">all values in a list</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.coll.pairs([list])</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">returns `[first,second],[second,third], &#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.coll.pairs([1,2,3]) YIELD value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[1,2],[2,3],[3,null]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.coll.pairsMin([1,2,3]) YIELD value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[1,2],[2,3]</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.coll.toSet([list])</code></p></td>
@@ -1646,8 +1905,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_lookup_functions">Lookup Functions</h5>
+<div class="sect3">
+<h4 id="_lookup_functions">Lookup Functions</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1673,8 +1932,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_phonetic_comparisons">Phonetic Comparisons</h5>
+<div class="sect3">
+<h4 id="_phonetic_comparisons">Phonetic Comparisons</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1694,7 +1953,7 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock">join the given strings with the given delimiter.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CAL apoc.text.clean(text) YIELD value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.text.clean(text) YIELD value</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">strip the given string of everything except alpha numeric characters and convert it to lower case.</p></td>
 </tr>
 <tr>
@@ -1733,17 +1992,21 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.util.md5([values])</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">computes the md5 of the concatenation of all string values of the list</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.util.sleep({duration})</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sleeps for &lt;duration&gt; millis, transaction termination is honored</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_date_time_support">Date/time Support</h4>
+<div class="sect2">
+<h3 id="_date_time_support">Date/time Support</h3>
 <div class="paragraph">
 <p>(thanks @tkroman)</p>
 </div>
-<div class="sect4">
-<h5 id="_conversion_between_formatted_dates_and_timestamps">Conversion between formatted dates and timestamps</h5>
+<div class="sect3">
+<h4 id="_conversion_between_formatted_dates_and_timestamps">Conversion between formatted dates and timestamps</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1799,8 +2062,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_reading_separate_datetime_fields">Reading separate datetime fields</h5>
+<div class="sect3">
+<h4 id="_reading_separate_datetime_fields">Reading separate datetime fields</h4>
 <div class="paragraph">
 <p>Splits date (optionally, using given custom format) into fields returning a map from field name to its value.</p>
 </div>
@@ -1816,8 +2079,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_bitwise_operations">Bitwise operations</h4>
+<div class="sect2">
+<h3 id="_bitwise_operations">Bitwise operations</h3>
 <div class="paragraph">
 <p>Provides a wrapper around the java bitwise operations.</p>
 </div>
@@ -1893,8 +2156,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_path_expander">Path Expander</h4>
+<div class="sect2">
+<h3 id="_path_expander">Path Expander</h3>
 <div class="paragraph">
 <p>(thanks @keesvegter)</p>
 </div>
@@ -1913,8 +2176,8 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tr>
 </tbody>
 </table>
-<div class="sect4">
-<h5 id="_relationship_filter">Relationship Filter</h5>
+<div class="sect3">
+<h4 id="_relationship_filter">Relationship Filter</h4>
 <div class="paragraph">
 <p>Syntax: <code>[&lt;]RELATIONSHIP_TYPE1[&gt;]|[&lt;]RELATIONSHIP_TYPE2[&gt;]|&#8230;&#8203;</code></p>
 </div>
@@ -1968,10 +2231,10 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_label_filter">Label Filter</h5>
+<div class="sect3">
+<h4 id="_label_filter">Label Filter</h4>
 <div class="paragraph">
-<p>Syntax: <code>[+-]LABEL1|LABEL2|&#8230;&#8203;</code></p>
+<p>Syntax: <code>[+-/]LABEL1|LABEL2|&#8230;&#8203;</code></p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -2009,12 +2272,23 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <p>exclude label (blacklist)</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/Friend</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Friend</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+
+</div>
+<div class="paragraph">
+<p>stop traversal after reaching a friend (but include him)</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_parallel_node_search">Parallel Node Search</h4>
+<div class="sect2">
+<h3 id="_parallel_node_search">Parallel Node Search</h3>
 <div class="paragraph">
 <p>Utility to find nodes in parallel (if possible). These procedures return a single list of nodes or a list of 'reduced' records with node id, labels, and the properties where the search was executed upon.</p>
 </div>
@@ -2025,20 +2299,20 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.node(labelPropertyMap, searchType, search ) yield node as &lt;identifier&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.node(labelPropertyMap, searchType, search ) yield node</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A distinct set of Nodes will be returned.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.nodeAll(labelPropertyMap, searchType, search ) yield node as &lt;identifier&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.nodeAll(labelPropertyMap, searchType, search ) yield node</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All the found Nodes will be returned.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.nodeReduced(labelPropertyMap, searchType, search ) yield id as &lt;identifier&gt;, labels as &lt;identifier&gt;, values as &lt;identifier&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A merged set of 'reduced' Node information will be returned. Per node one record.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.nodeReduced(labelPropertyMap, searchType, search ) yield id, labels, values</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A merged set of 'minimal' Node information will be returned. One record per node (-id).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.nodeAllReduced(labelPropertyMap, searchType, search ) yield id as &lt;identifier&gt;, labels as &lt;identifier&gt;, values as &lt;identifier&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All the found 'reduced' Node information will be returned. Per node label and property one record.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.search.nodeAllReduced(labelPropertyMap, searchType, search ) yield id, labels, values</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All the found 'minimal' Node information will be returned. One record per label and property.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2052,29 +2326,35 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>labelPropertyMap</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>'{ label1 : "propertyOne", label2 :["propOne","propTwo"] }'</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For every Label-Property combination a search will be executed in parallel (if possible): Label1.propertyOne, label2.propOne and label2.propTwo.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(JSON or Map) For every Label-Property combination a search will be executed in parallel (if possible): Label1.propertyOne, label2.propOne and label2.propTwo.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'exact' | 'contains' | 'starts with' | 'ends with'</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This is case insensitive.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">'exact' or 'contains' or 'starts with' or 'ends with'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Case insensitive string search operators</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"&lt;", "&gt;", "=", "&lt;&gt;", "&#8656;", "&gt;=", "=~"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operators</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>search</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">'Keanu'</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The actual search term (case sensitive).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The actual search term (string, number, etc).</p></td>
 </tr>
 </tbody>
 </table>
 <div class="listingblock">
 <div class="title">example</div>
 <div class="content">
-<pre class="highlight"><code class="language-cypher" data-lang="cypher">CALL apoc.search.nodeAll('{Person: "name",Movie: ["title","tagline"]}','contains','her') YIELD node AS n RETURN n</code></pre>
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">CALL apoc.search.nodeAll('{Person: "name",Movie: ["title","tagline"]}','contains','her') YIELD node AS n RETURN n
+call apoc.search.nodeReduced({Person: 'born', Movie: ['released']},'&gt;',2000) yield id, labels, properties RETURN *</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_graph_algorithms_work_in_progress">Graph Algorithms (work in progress)</h4>
+<div class="sect2">
+<h3 id="_graph_algorithms_work_in_progress">Graph Algorithms (work in progress)</h3>
 <div class="paragraph">
 <p>Provides some graph algorithms (not very optimized yet)</p>
 </div>
@@ -2121,7 +2401,7 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock">calculate closeness  centrality for given nodes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.algo.cover(nodes) YIELD rel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.algo.cover(nodeIds) YIELD rel</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">return relationships between this set of nodes</p></td>
 </tr>
 </tbody>
@@ -2153,11 +2433,11 @@ It&#8217;s basic structure is: <code>{name:"Name",properties:{properties},nodes:
 <td class="tableblock halign-left valign-top"><p class="tableblock">simple label propagation kernel</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.algo.cliques(minSize) YIELD cliques</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.algo.cliques(minSize) YIELD clique</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">search the graph and return all maximal cliques at least at  large as the minimum size argument.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.algo.cliquesWithNode(startNode, minSize) YIELD cliques</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apoc.algo.cliquesWithNode(startNode, minSize) YIELD clique</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">search the graph and return all maximal cliques that  are at least as large than the minimum size argument and contain this node</p></td>
 </tr>
 </tbody>
@@ -2175,47 +2455,26 @@ MATCH (n:Person)</code></pre>
 </div>
 </div>
 </div>
-<h1 id="_detailed_documentation" class="sect0">Detailed Documentation</h1>
-<div class="sect1">
-<h2 id="_help_and_usage">Help and Usage</h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc-help-apoc.jpg" alt="apoc help apoc" width="600">
-</div>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>call apoc.help('search')</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lists name, description-text and if the procedure performs writes (descriptions are WIP), search string is checked against beginning (package) or end (name) of procedure</p></td>
-</tr>
-</tbody>
-</table>
-<div class="listingblock">
-<div class="title">helpful</div>
-<div class="content">
-<pre class="highlight"><code class="language-cypher" data-lang="cypher">CALL apoc.help("apoc") YIELD name, text
-WITH * WHERE text IS null
-RETURN name AS undocumented</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To generate the help from <code>@Description</code> annotations, apoc currently scans the jar file with ASM.</p>
-</div>
-</div>
 </div>
 <div class="sect1">
 <h2 id="_text_and_lookup_indexes">Text and Lookup Indexes</h2>
 <div class="sectionbody">
-<div class="sect3">
-<h4 id="_index_queries_2">Index Queries</h4>
+<div class="sect2">
+<h3 id="_index_queries_2">Index Queries</h3>
 <div class="paragraph">
 <p>Procedures to add to and query manual indexes</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Please note that there are (case-sensitive) <a href="http://neo4j.com/docs/developer-manual/current/#cypher-schema">automatic schema indexes</a>, for equality, non-equality, existence, range queries, starts with, ends-with and contains!
+</td>
+</tr>
+</table>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -2279,8 +2538,8 @@ RETURN name AS undocumented</code></pre>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_index_management_2">Index Management</h4>
+<div class="sect2">
+<h3 id="_index_management_2">Index Management</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -2288,7 +2547,7 @@ RETURN name AS undocumented</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.index.list() - YIELD type,name,config</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.index.list() YIELD type,name,config</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lists all manual indexes</p></td>
 </tr>
 <tr>
@@ -2749,7 +3008,7 @@ CALL apoc.path.expand(startNode &lt;id&gt;|Node|list, 'TYPE|TYPE_OUT&gt;|&lt;TYP
 <p>Label Filter</p>
 </div>
 <div class="paragraph">
-<p>Syntax: <code>[+-]LABEL1|LABEL2|&#8230;&#8203;</code></p>
+<p>Syntax: <code>[+-/]LABEL1|LABEL2|&#8230;&#8203;</code></p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -2787,6 +3046,17 @@ CALL apoc.path.expand(startNode &lt;id&gt;|Node|list, 'TYPE|TYPE_OUT&gt;|&lt;TYP
 <p>exclude label (blacklist)</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/Friend</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Friend</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+
+</div>
+<div class="paragraph">
+<p>stop traversal after reaching a friend (but include him)</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -2809,6 +3079,48 @@ return pp;
 match (p:Person) with p limit 3
 call apoc.path.expand(p,"ACTED_IN&gt;|PRODUCED&lt;|FOLLOWS&lt;","+Movie|Person",1,2) yield path as pp
 return p, pp</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_expand_with_config">Expand with Config</h4>
+<div class="listingblock">
+<div class="content">
+<pre>apoc.path.expandConfig(startNode &lt;id&gt;Node/list, {config}) yield path expands from start nodes using the given configuration and yields the resulting paths</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Takes an additional config to provide configuration options:</p>
+</div>
+<div class="listingblock">
+<div class="title">Config</div>
+<div class="content">
+<pre>{minLevel: -1|number,
+ maxLevel: -1|number,
+ relationshipFilter: '[&lt;]RELATIONSHIP_TYPE1[&gt;]|[&lt;]RELATIONSHIP_TYPE2[&gt;]|...',
+ labelFilter: '[+-]LABEL1|LABEL2|...',
+ uniqueness: RELATIONSHIP_PATH|NONE|NODE_GLOBAL|NODE_LEVEL|NODE_PATH|NODE_RECENT|RELATIONSHIP_GLOBAL|RELATIONSHIP_LEVEL|RELATIONSHIP_RECENT,
+ bfs: true|false}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So you can turn this cypher query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (user:User) WHERE user.id = 460
+MATCH (user)-[:RATED]-&gt;(movie)&lt;-[:RATED]-(collab)-[:RATED]-&gt;(reco)
+RETURN count(*);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>into this procedure call, with changed semantics for uniqueness and bfs (which is Cypher&#8217;s expand mode)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (user:User) WHERE user.id = 460
+CALL apoc.path.expandConfig(user,{relationshipFilter:"RATED",minLevel:3,maxLevel:3,bfs:false,uniqueness:"NONE"}) YIELD path
+RETURN count(*);</code></pre>
 </div>
 </div>
 </div>
@@ -2852,7 +3164,7 @@ Caution: Due to the complexity of this algorithm it is recommended to run it on 
 <pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (node:Node)
 WHERE node.id %2 = 0
 WITH collect(node) AS nodes
-CALL apoc.algo.closeness(['TYPE'],nodes,INCOMING) YIELD node, score
+CALL apoc.algo.closeness(['TYPE'],nodes,'INCOMING') YIELD node, score
 RETURN node, score
 ORDER BY score DESC</code></pre>
 </div>
@@ -2882,7 +3194,7 @@ Caution: Due to the complexity of this algorithm it is recommended to run it on 
 <pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (node:Node)
 WHERE node.id %2 = 0
 WITH collect(node) AS nodes
-CALL apoc.algo.betweenness(['TYPE'],nodes,BOTH) YIELD node, score
+CALL apoc.algo.betweenness(['TYPE'],nodes,'BOTH') YIELD node, score
 RETURN node, score
 ORDER BY score DESC</code></pre>
 </div>
@@ -3288,6 +3600,70 @@ RETURN status.id, status.text, u.screen_name, [t IN e.hashtags | t.text] as tags
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_load_json_stackoverflow_example">Load JSON StackOverflow Example</h4>
+<div class="paragraph">
+<p>There have been articles before about <a href="http://neo4j.com/blog/cypher-load-json-from-url/">loading JSON from Web-APIs like StackOverflow</a>.</p>
+</div>
+<div class="paragraph">
+<p>With <code>apoc.load.json</code> it&#8217;s now very easy to load JSON data from any file or URL.</p>
+</div>
+<div class="paragraph">
+<p>If the result is a JSON object is returned as a singular map.
+Otherwise if it was an array is turned into a stream of maps.</p>
+</div>
+<div class="paragraph">
+<p>The URL for retrieving the last questions and answers of the <a href="http://stackoverflow.com/questions/tagged/neo4j">neo4j tag</a> is this:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://api.stackexchange.com/2.2/questions?pagesize=100&amp;order=desc&amp;sort=creation&amp;tagged=neo4j&amp;site=stackoverflow&amp;filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" class="bare">https://api.stackexchange.com/2.2/questions?pagesize=100&amp;order=desc&amp;sort=creation&amp;tagged=neo4j&amp;site=stackoverflow&amp;filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf</a></p>
+</div>
+<div class="paragraph">
+<p>Now it can be used from within Cypher directly, let&#8217;s first introspect the data that is returned.</p>
+</div>
+<div class="listingblock">
+<div class="title">JSON data from StackOverflow</div>
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">WITH "https://api.stackexchange.com/2.2/questions?pagesize=100&amp;order=desc&amp;sort=creation&amp;tagged=neo4j&amp;site=stackoverflow&amp;filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" AS url
+CALL apoc.load.json(url) YIELD value
+UNWIND value.items AS item
+RETURN item.title, item.owner, item.creation_date, keys(item)</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc.load.json.so.png" alt="apoc.load.json.so">
+</div>
+</div>
+<div class="paragraph">
+<p>Combined with the cypher query from the original blog post it&#8217;s easy to create the full Neo4j graph of those entities.</p>
+</div>
+<div class="listingblock">
+<div class="title">Graph data created via loading JSON from StackOverflow</div>
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">WITH "https://api.stackexchange.com/2.2/questions?pagesize=100&amp;order=desc&amp;sort=creation&amp;tagged=neo4j&amp;site=stackoverflow&amp;filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" AS url
+CALL apoc.load.json(url) YIELD value
+UNWIND value.items AS q
+MERGE (question:Question {id:q.question_id}) ON CREATE
+  SET question.title = q.title, question.share_link = q.share_link, question.favorite_count = q.favorite_count
+
+MERGE (owner:User {id:q.owner.user_id}) ON CREATE SET owner.display_name = q.owner.display_name
+MERGE (owner)-[:ASKED]-&gt;(question)
+
+FOREACH (tagName IN q.tags | MERGE (tag:Tag {name:tagName}) MERGE (question)-[:TAGGED]-&gt;(tag))
+FOREACH (a IN q.answers |
+   MERGE (question)&lt;-[:ANSWERS]-(answer:Answer {id:a.answer_id})
+   MERGE (answerer:User {id:a.owner.user_id}) ON CREATE SET answerer.display_name = a.owner.display_name
+   MERGE (answer)&lt;-[:PROVIDED]-(answerer)
+)</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc.load.json-so-result.png" alt="apoc.load.json so result">
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_load_jdbc">Load JDBC</h3>
@@ -3311,6 +3687,33 @@ RETURN status.id, status.text, u.screen_name, [t IN e.hashtags | t.text] as tags
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>To simplify the JDBC URL syntax, for example 'jdbc:derby:derbyDB', and so as to mask the details one can define in conf/neo4j.conf</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apoc.jdbc.derby.url=jdbc:derby:derbyDB</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>CALL apoc.load.jdbc('jdbc:derby:derbyDB','PERSON') YIELD row CREATE (:Person {name:row.name})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>becomes</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>CALL apoc.load.jdbc('derby','PERSON') YIELD row CREATE (:Person {name:row.name})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The 3rd value in the 'apoc.jdbc.derby.url=' effectively defines an &lt;alias&gt; to be used in the apoc.load.jdbc('&lt;alias&gt;',&#8230;&#8203;.</p>
+</div>
 <div class="sect3">
 <h4 id="_mysql_example">MySQL Example</h4>
 <div class="sect4">
@@ -3394,6 +3797,15 @@ RETURN row limit 1;</code></pre>
 <div class="imageblock">
 <div class="content">
 <img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc-load-jdbc.jpg" alt="apoc load jdbc" width="800">
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Create data from jdbc query results in batches (and in parallel).</div>
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">CALL apoc.periodic.iterate('
+call apoc.load.jdbc("jdbc:mysql://localhost:3306/northwind?user=root","company")',
+'CREATE (p:Person) SET p += value', {batchSize:10000, parallel:true})
+RETURN batches, total</code></pre>
 </div>
 </div>
 </div>
@@ -3557,8 +3969,9 @@ CREATE (t)-[:GENRE]-&gt;(g);</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="sect3">
-<h4 id="_notes_2">Notes</h4>
+</div>
+<div class="sect2">
+<h3 id="_notes_2">Notes</h3>
 <div class="paragraph">
 <p>Gephi has a <a href="https://marketplace.gephi.org/plugin/graph-streaming/">streaming plugin</a>, that can provide and accept <a href="https://github.com/gephi/gephi/wiki/GraphStreaming#Gephi_as_Master">JSON-graph-data</a> in a streaming fashion.</p>
 </div>
@@ -3575,8 +3988,8 @@ CREATE (t)-[:GENRE]-&gt;(g);</code></pre>
 <p>You can also configure it in <code>conf/neo4j.conf</code> via  <code>apoc.gephi.url=url</code> or <code>apoc.gephi.&lt;key&gt;.url=url</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_example_2">Example</h4>
+<div class="sect2">
+<h3 id="_example_2">Example</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-cypher" data-lang="cypher">match path = (:Person)-[:ACTED_IN]-&gt;(:Movie)
@@ -3589,7 +4002,6 @@ return nodes, relationships, time</code></pre>
 <div class="imageblock">
 <div class="content">
 <img src="http://neo4j-contrib.github.io/neo4j-apoc-procedures/docs/img/apoc.gephi.gif" alt="apoc.gephi" width="800">
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -3939,6 +4351,40 @@ RETURN id, value.author, value.title</code></pre>
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_simpler_xml_format">Simpler XML Format</h5>
+<div class="paragraph">
+<p>In a simpler XML representation, each type of children gets it&#8217;s own entry within the parent map.
+The element-type as key is prefixed with "_" to prevent collisions with attributes.</p>
+</div>
+<div class="paragraph">
+<p>If there is a single element, then the entry will just have that element as value.
+If there is more than one element there will be a list of values.</p>
+</div>
+<div class="paragraph">
+<p>Each child will still have its <code>_type</code> field to discern them.</p>
+</div>
+<div class="paragraph">
+<p>Here is the example from above loaded with <code>apoc.load.xmlSimple</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">call apoc.load.xmlSimple("https://raw.githubusercontent.com/neo4j-contrib/neo4j-apoc-procedures/master/src/test/resources/books.xml")</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">{_type: "catalog", _book: [
+  {_type: "book", id: "bk101",
+    _author: [{_type: "author", _text: "Gambardella, Matthew"},{_type: author, _text: "Arciniegas, Fabio"}],
+    _title: {_type: "title", _text: "XML Developer's Guide"},
+    _genre: {_type: "genre", _text: "Computer"},
+    _price: {_type: "price", _text: "44.95"},
+    _publish_date: {_type: "publish_date", _text: "2000-10-01"},
+    _description: {_type: description, _text: An in-depth look at creating applications ....</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3997,8 +4443,8 @@ RETURN n.prop</code></pre>
 <div class="paragraph">
 <p>We can use Cypher as safe, graph-aware, partially compiled scripting language within APOC.</p>
 </div>
-<div class="sect4">
-<h5 id="_cypher_execution_2">Cypher Execution</h5>
+<div class="sect3">
+<h4 id="_cypher_execution_2">Cypher Execution</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -4014,12 +4460,20 @@ RETURN n.prop</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">runs each statement in the file, all semicolon separated - currently no schema operations</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.runMany('cypher;\nstatements;',{params})</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">runs each semicolon separated statement and returns summary - currently no schema operations</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.mapParallel(fragment, params, list-to-parallelize) yield value</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">executes fragment in parallel batches with the list segments being assigned to _</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.doIt(fragment, params) yield value</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">executes writing fragment with the given parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CALL apoc.cypher.runTimeboxed('cypherStatement',{params}, timeout)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">abort statement after timeout millis if not finished</p></td>
 </tr>
 </tbody>
 </table>
@@ -4063,6 +4517,18 @@ return label, value.count as count</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_running_a_cypher_statement_timeboxed">running a cypher statement timeboxed</h4>
+<div class="paragraph">
+<p>There&#8217;s a way to terminate a cypher statement if it takes longer than a given threshold. Consider an expensive statement calculating cross product of shortestpaths for each pair of nodes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cypher" data-lang="cypher">call apoc.cypher.runTimeboxed("match (n),(m) match p=shortestPath((n)-[*]-(m)) return p", null, 10000) yield value
+return value.p</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_job_management_and_periodic_execution">Job management and periodic execution</h3>
@@ -4103,7 +4569,7 @@ SET u:Processed RETURN count(*)
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-30 10:59:54 MESZ
+Last updated 2016-08-18 22:56:07 MESZ
 </div>
 </div>
 </body>

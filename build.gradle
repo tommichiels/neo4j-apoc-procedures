@@ -1,61 +1,90 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+buildscript {
+    repositories {
+        mavenCentral()
+        //Needed only for SNAPSHOT versions
+        //maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+    dependencies {
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"
+    }
+}
 
-group = 'org.neo4j.procedure'
-version = '1.0.0-SNAPSHOT'
+plugins {
+    id 'java'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+    id "org.asciidoctor.convert" version "1.5.3"
+    id "com.bmuschko.nexus" version "2.3.1"
+}
+apply plugin: 'io.codearte.nexus-staging'
 
-description = """neo4j-apoc-procedures"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+idea {
+    project {
+        ext.jdkName = '1.8'
+        ext.languageLevel = '1.8'
+    }
+}
+
+group = 'org.neo4j.procedure'
+version = '3.0.4.2-SNAPSHOT '
+archivesBaseName = 'apoc'
+
+description = """neo4j-apoc-procedures"""
+
+ext {
+    neo4jVersion = "3.0.4"
+}
+
 repositories {
-     maven { url "http://repo.maven.apache.org/maven2" }
+     mavenCentral()
 }
 
 dependencies {
-    compile group: 'it.unimi.dsi', name: 'fastutil', version:'7.0.12'
     compile group: 'commons-codec', name: 'commons-codec', version:'1.9'
+    compileOnly group: 'net.biville.florent', name: 'neo4j-sproc-compiler', version:'1.0-M01'
     
     testCompile group: 'org.apache.derby', name: 'derby', version:'10.12.1.1'
-    testCompile group: 'org.neo4j', name: 'neo4j-enterprise', version:'3.0.1'
-    testCompile group: 'org.neo4j', name: 'neo4j-kernel', version:'3.0.1', classifier: "tests"
-    testCompile group: 'org.neo4j', name: 'neo4j-io', version:'3.0.1', classifier: "tests"
+    testCompile group: 'org.neo4j', name: 'neo4j-enterprise', version:neo4jVersion
+    testCompile group: 'org.neo4j', name: 'neo4j-kernel', version:neo4jVersion, classifier: "tests"
+    testCompile group: 'org.neo4j', name: 'neo4j-io', version:neo4jVersion, classifier: "tests"
     testCompile group: 'junit', name: 'junit', version:'4.12'
     testCompile group: 'org.hamcrest', name: 'hamcrest-library', version:'1.3'
-    
-    compile(group: 'org.neo4j', name: 'neo4j', version:'3.0.1') {
-       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
-       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
-       Please review and delete this closure when resolved. */
+
+    compileOnly 'org.mongodb:mongodb-driver:3.2.2'
+    testCompile 'org.mongodb:mongodb-driver:3.2.2'
+
+    compileOnly(group: 'org.neo4j', name: 'neo4j', version:neo4jVersion)
+    compileOnly(group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version:'1.9.7')
+    testCompile(group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version:'1.9.7')
+    compileOnly(group: 'org.ow2.asm', name: 'asm', version:'5.0.2')
+    compile group: 'com.github.javafaker', name: 'javafaker', version:'0.10'
+}
+
+test {
+    testLogging {
+        exceptionFormat = 'full'
     }
-    compile(group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version:'1.9.7') {
-       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
-       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
-       Please review and delete this closure when resolved. */
-    }
-    compile(group: 'org.ow2.asm', name: 'asm', version:'5.0.2') {
-       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
-       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
-       Please review and delete this closure when resolved. */
-    }
+}
+
+javadoc {
+    failOnError = false
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+shadowJar {
+  dependencies {
+    include(dependency('commons-codec:commons-codec'))
+    include(dependency('com.github.javafaker:javafaker'))
+  }
 }
 
 /**************
 * ASCIIDOCTOR *
 **************/
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
-    }
-}
-
-apply plugin: 'org.asciidoctor.convert'
 
 asciidoctor {
     sourceDir = file('docs')
@@ -66,11 +95,77 @@ asciidoctor {
 asciidoctor.doLast {
     copy {
         from 'build/docs/html5'
-        into "$projectDir"
+        into "$projectDir/docs"
         include 'index.html'
     }
 }
 
+assemble.dependsOn(asciidoctor)
+
 /******
 * END *
 ******/
+
+// publishing
+
+nexusStaging {
+    packageGroup = "org.neo4j"
+    stagingProfileId = "acdc2431d20c3d"
+
+    //serverUrl = stable release repository - by default Sonatype OSSRH - https://oss.sonatype.org/service/local/
+    //username  = (optional) - username to the server
+    // password = (optional) - password
+    //numberOfRetries (optional) - number of retries when waiting for a repository to change a state - by default 7
+    //delayBetweenRetriesInMillis (optional) - delay between retries - by default 1000 milliseconds
+}
+
+modifyPom {
+    project {
+        name 'neo4j-apoc-procedures'
+        packaging 'jar'
+        description 'A collection of useful Neo4j Procedures'
+        url 'http://github.com/neo4j-contrib/neo4j-apoc-procedures'
+
+        organization {
+            name "Neo Technology, Inc."
+            url "http://neotechnology.com"
+        }
+
+        scm {
+            url 'https://github.com/neo4j-contrib/neo4j-apoc-procedures'
+        }
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                comments """Note that this license is for the project itself,
+and not for its dependencies."""
+                distribution "repo"
+            }
+        }
+
+        developers {
+            developer {
+                id 'michaelhunger'
+                name 'Michael Hunger'
+                email 'michael.hunger@neo4j.com'
+            }
+        }
+    }
+}
+
+// tweaks for travis
+// from
+if (System.env.TRAVIS == 'true') {
+  allprojects {
+    tasks.withType(GroovyCompile) {
+      groovyOptions.fork = false
+    }
+    tasks.withType(Test) {
+      // containers (currently) have 2 dedicated cores and 4GB of memory
+      maxParallelForks = 2
+      minHeapSize = '128m'
+    }
+  }
+}

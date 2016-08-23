@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.test.TestGraphDatabaseFactory;
 
@@ -55,6 +56,41 @@ public class PageRankTest
                                                  "  (j)-[:TYPE_2 {score:0.80}]->(e),\n" +
                                                  "  (k)-[:TYPE_2 {score:0.80}]->(e)\n";
 
+    public static final String COMPANIES_QUERY_LABEL = "CREATE (a:Company {name:'a'})\n" +
+            "CREATE (o:Emp {name:'o'})\n" +
+            "CREATE (b:Company {name:'b'})\n" +
+            "CREATE (c:Company {name:'c'})\n" +
+            "CREATE (d:Company {name:'d'})\n" +
+            "CREATE (e:Company {name:'e'})\n" +
+            "CREATE (l:Emp {name:'l'})\n" +
+            "CREATE (f:Company {name:'f'})\n" +
+            "CREATE (m:Emp {name:'m'})\n" +
+            "CREATE (g:Company {name:'g'})\n" +
+            "CREATE (h:Company {name:'h'})\n" +
+            "CREATE (n:Emp {name:'n'})\n" +
+            "CREATE (i:Company {name:'i'})\n" +
+            "CREATE (j:Company {name:'j'})\n" +
+            "CREATE (k:Company {name:'k'})\n" +
+            "CREATE (p:Emp {name:'p'})\n" +
+
+            "CREATE\n" +
+            "  (b)-[:TYPE_1 {score:0.80}]->(c),\n" +
+            "  (c)-[:TYPE_1 {score:0.80}]->(b),\n" +
+            "  (d)-[:TYPE_1 {score:0.80}]->(a),\n" +
+            "  (e)-[:TYPE_1 {score:0.80}]->(b),\n" +
+            "  (e)-[:TYPE_1 {score:0.80}]->(d),\n" +
+            "  (e)-[:TYPE_1 {score:0.80}]->(f),\n" +
+            "  (f)-[:TYPE_1 {score:0.80}]->(b),\n" +
+            "  (f)-[:TYPE_1 {score:0.80}]->(e),\n" +
+            "  (g)-[:TYPE_2 {score:0.80}]->(b),\n" +
+            "  (g)-[:TYPE_2 {score:0.80}]->(e),\n" +
+            "  (h)-[:TYPE_2 {score:0.80}]->(b),\n" +
+            "  (h)-[:TYPE_2 {score:0.80}]->(e),\n" +
+            "  (i)-[:TYPE_2 {score:0.80}]->(b),\n" +
+            "  (i)-[:TYPE_2 {score:0.80}]->(e),\n" +
+            "  (j)-[:TYPE_2 {score:0.80}]->(e),\n" +
+            "  (k)-[:TYPE_2 {score:0.80}]->(e)\n";
+
     public static final String RANDOM_GRAPH =
             "FOREACH (_ IN range(0,100) | CREATE ()) " +
             "WITH 0.1 AS p " +
@@ -88,7 +124,33 @@ public class PageRankTest
         assertTrue( result.hasNext() );
         Map<String,Object> row = result.next();
         assertFalse( result.hasNext() );
-        assertEquals( PageRankAlgoTest.EXPECTED, (double) row.get( "score" ), 0.1D );
+        assertEquals(PageRankAlgoTest.EXPECTED, (double) row.get("score"), 0.1D);
+    }
+
+    @Test
+    public void shouldGetPageRankWithCypherExpectedResult() throws IOException
+    {
+        db.execute( COMPANIES_QUERY ).close();
+        Result result = db.execute("CALL apoc.algo.pageRankWithCypher({iterations:20, write:true}) ");
+        System.out.println(result.resultAsString());
+        ResourceIterator<Double> it = db.execute("MATCH (n) RETURN n.name as name, n.pagerank as score ORDER BY score DESC LIMIT 1").columnAs("score");
+        assertTrue( it.hasNext() );
+        assertEquals(PageRankAlgoTest.EXPECTED, it.next(), 0.1D);
+        assertFalse( it.hasNext() );
+        it.close();
+    }
+
+    @Test
+    public void shouldGetPageRankWithCypherExpectedResultWithLables() throws IOException
+    {
+        db.execute( COMPANIES_QUERY_LABEL ).close();
+        Result result = db.execute("CALL apoc.algo.pageRankWithCypher({iterations:20, write:true, node_cypher:'MATCH (node:Company) return id(node) as id'}) ");
+        System.out.println(result.resultAsString());
+        ResourceIterator<Double> it = db.execute("MATCH (n) WHERE exists(n.pagerank) RETURN n.name as name, n.pagerank as score ORDER BY score DESC LIMIT 1").columnAs("score");
+        assertTrue( it.hasNext() );
+        assertEquals( PageRankAlgoTest.EXPECTED, it.next(), 0.1D );
+        assertFalse( it.hasNext() );
+        it.close();
     }
 
     @Test

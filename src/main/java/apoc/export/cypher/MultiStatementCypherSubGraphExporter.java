@@ -1,6 +1,8 @@
-package apoc.export.util;
+package apoc.export.cypher;
 
 
+import apoc.export.util.FormatUtils;
+import apoc.export.util.Reporter;
 import org.neo4j.cypher.export.SubGraph;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
@@ -156,7 +158,7 @@ public class MultiStatementCypherSubGraphExporter {
         while (labels.hasNext()) {
             Label next = labels.next();
             String labelName = next.name();
-            if (uniqueConstraints.containsKey(labelName)) uniqueFound = true;
+            if (uniqueConstraints.containsKey(labelName) && node.hasProperty(uniqueConstraints.get(labelName))) uniqueFound = true;
             if (indexNames.contains(labelName))
                 result.insert(0, label(labelName));
             else
