@@ -92,7 +92,8 @@ public class WeaklyConnectedComponents {
 			}
 			log.info("calculation done");
             //it.close();
-        	return results.stream().map((x) ->new CCResult( x.stream().map((z) -> new Long(z.getId())).collect(Collectors.toList()), x.stream().collect(Collectors.groupingBy(Vertex::getType)).entrySet().stream().collect(Collectors.toMap(
+        	//TODO fix later
+			return results.stream().map((x) ->new CCResult(1l, x.stream().map((z) -> new Long(z.getId())).collect(Collectors.toList()), x.stream().collect(Collectors.groupingBy(Vertex::getType)).entrySet().stream().collect(Collectors.toMap(
                     e -> e.getKey(),
                     e -> e.getValue().size()))
                 ));

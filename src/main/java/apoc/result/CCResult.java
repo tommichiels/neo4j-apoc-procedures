@@ -8,12 +8,14 @@ import java.util.Map;
  * @since 26.02.16
  */
 public class CCResult {
-    public final List<Long> nodeIds;
+    public final Long ccId;
+	public final List<Long> nodeIds;
     public final Map stats;
 	
     
-    public CCResult(List<Long> nodeIds, Map stats) {
-		this.nodeIds = nodeIds;
+    public CCResult(Long ccId,List<Long> nodeIds, Map stats) {
+		this.ccId = ccId;
+    	this.nodeIds = nodeIds;
 		this.stats = stats;
 	}
     
